@@ -8,9 +8,9 @@ import argparse
 
 # PY2/PY3 support for YAML lib
 if sys.version_info.major == 3:
-    from .lib3 import yaml
+    from vendor.lib3x import yaml
 else:
-    from .lib import yaml
+    from vendor.lib2x import yaml
 
 
 def read_config(configfile):

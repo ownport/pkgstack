@@ -1,0 +1,9 @@
+FROM alpine:3.4
+
+RUN apk add --update make python3 wget && \
+    wget --no-check-certificate https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && \
+    python3 /tmp/get-pip.py && \
+    rm /tmp/get-pip.py && \
+    apk del wget && \
+    pip install --upgrade pip && \
+    pip install ${PIP_OPTS} pytest pytest-cov codecov

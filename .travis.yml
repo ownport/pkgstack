@@ -1,0 +1,35 @@
+sudo: false
+language: python
+
+notifications:
+  email: false
+
+env:
+  - PYTHONDONTWRITEBYTECODE=1
+
+python:
+  - "2.7"
+  # - "3.5"
+
+install:
+  - echo "===================================================="
+  - echo "Install section"
+  - echo "----------------------------------------------------"
+  - pip install ${PIP_OPTS} pytest
+  - pip install ${PIP_OPTS} pytest-cov
+  - pip install ${PIP_OPTS} codecov
+
+script:
+  - echo "===================================================="
+  - echo "Build"
+  - echo "----------------------------------------------------"
+  - python setup.py sdist
+
+  - echo "===================================================="
+  - echo "Tests"
+  - echo "----------------------------------------------------"
+  - pip install --editable .
+  - make test-all-with-coverage
+
+after_success:
+  - codecov

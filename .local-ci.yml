@@ -1,0 +1,12 @@
+
+env:
+  - LOCAL_REPOS_HOST=172.17.0.2
+  - PIP_OPTS="--index-url=http://${LOCAL_REPOS_HOST}/repo/pypi/simple/ --trusted-host=${LOCAL_REPOS_HOST}"
+
+docker-images:
+  python:2.7: ownport/pkgstack-dev-env:py2.7
+  python:3.5: ownport/pkgstack-dev-env:py3.5
+
+docker-opts:
+  name: pkgstack-dev-local-ci
+  hostname: pkgstack-dev-local-ci

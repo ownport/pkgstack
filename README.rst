@@ -10,12 +10,26 @@ Simple python package management tool based on pip
 
 How to install
 --------------
-to be described later
+
+to install `pkgstack` use the Releases page ..image:: https://github.com/ownport/pkgstack/releases
+to download `pkgstack` and run it from command line as:
+
+    $ ./pkgstack
+
 
 How to use
 ----------
-to be described later
+
+To get a help about how to use `pkgstack` please use option `--help`:
+
+    $ ./pkgstack --help
+
 
 For developers
 --------------
-to be described later
+
+All the tests are performed in Docker containers. Use the command:
+
+    $ make run-local-ci
+
+to start docker containers vi local-ci tool

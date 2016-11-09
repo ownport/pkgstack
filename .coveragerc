@@ -1,2 +1,2 @@
 [run]
-omit=pkgstack/lib/*,pkgstack/lib3/*
+omit=pkgstack/vendor/*

@@ -24,6 +24,10 @@ compile: clean
 		rm bin/$(PROJECT_NAME_BIN).zip && \
 		chmod a+x bin/$(PROJECT_NAME_BIN)
 
+sdist:
+	@ python setup.py sdist
+
+
 build-dev-docker-images:
 	@ docker build --tag ownport/pkgstack-dev-env:py2.7 -f docker/Dockerfile.py27 docker/
 	@ docker build --tag ownport/pkgstack-dev-env:py3.5 -f docker/Dockerfile.py35 docker/

@@ -5,6 +5,7 @@ import sys
 import pip
 import argparse
 
+from __init__ import __version__
 
 # PY2/PY3 support for YAML lib
 if sys.version_info.major == 3:
@@ -59,17 +60,16 @@ def process(config):
 
 def run():
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog='pkgstack')
+    parser.add_argument('-v', '--version', action='version', version='v%s' % __version__)
+    parser.add_argument('-p', '--profile', required=True,
+            action='append', help='the path to the package profile, yaml file')
     args = parser.parse_args()
-    print(args)
 
-
-    # if len(sys.argv) == 1:
-    #     usage()
-    #
-    # for profile in sys.argv[1:]:
-    #     if profile in ('deps', 'dev-deps'):
-    #         install(profile)
-    #     else:
-    #         print '[ERROR] Only "deps" or/and "dev-deps" profiles are supported'
-    #         usage()
+    if args.profile:
+        for profile in args.profile:
+            if not os.path.exists(profile):
+                raise IOError('The path to profile does not exist, %s' % profile)
+            print(process(read_config(profile)))
+    else:
+        parser.print_help()

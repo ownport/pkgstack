@@ -9,7 +9,7 @@ setup(
     description='Simple python package management tool based on pip',
     packages=[__title__,],
     url='https://github.com/ownport/pkgstack',
-    author='Andrey Usov',
+    author='ownport',
     author_email='ownport@gmail.com',
     py_modules=['pkgstack'],
     entry_points='''
@@ -17,7 +17,7 @@ setup(
         pkgstack=pkgstack.main:run
     ''',
     keywords=['pip', 'install', 'wrapper', 'yaml', 'package', 'pypi'],
-    classifier=[
+    classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: Developers',

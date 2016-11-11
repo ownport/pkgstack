@@ -1,8 +1,10 @@
 pkgstack
 ===========
 
-.. image:: https://travis-ci.org/ownport/pkgstack.svg?branch=master :target: https://travis-ci.org/ownport/pkgstack
-.. image:: https://codecov.io/gh/ownport/pkgstack/branch/master/graph/badge.svg :target: https://codecov.io/gh/ownport/pkgstack
+.. image:: https://travis-ci.org/ownport/pkgstack.svg?branch=master
+   :target: https://travis-ci.org/ownport/pkgstack
+.. image:: https://codecov.io/gh/ownport/pkgstack/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/ownport/pkgstack
 
 Simple python package management tool based on pip
 
@@ -25,6 +27,7 @@ To get a help about how to use `pkgstack` please use option `--help`:
 The sample of configuration file:
 
 .. code-block:: yaml
+
     - install: pytest
 
     - name: Install pytest-cov

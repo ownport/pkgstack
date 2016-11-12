@@ -12,11 +12,11 @@ setup(
     author='ownport',
     author_email='ownport@gmail.com',
     py_modules=['pkgstack'],
-    entry_points='''
-        [console_scripts]
-        pkgstack=pkgstack.main:run
-    ''',
-    keywords=['pip', 'install', 'wrapper', 'yaml', 'package', 'pypi'],
+    entry_points={
+        'console_scripts': [
+            'pkgstack = pkgstack.main:run',
+        ]
+    }    keywords=['pip', 'install', 'wrapper', 'yaml', 'package', 'pypi'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',

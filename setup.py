@@ -7,11 +7,18 @@ setup(
     name=__title__,
     version=__version__,
     description='Simple python package management tool based on pip',
-    packages=[__title__,],
     url='https://github.com/ownport/pkgstack',
     author='ownport',
     author_email='ownport@gmail.com',
     py_modules=['pkgstack'],
+    packages=[
+        'pkgstack',
+        'pkgstack.vendor',
+        'pkgstack.vendor.lib2x',
+        'pkgstack.vendor.lib2x.yaml',
+        'pkgstack.vendor.lib3x',
+        'pkgstack.vendor.lib3x.yaml',
+    ],
     entry_points={
         'console_scripts': [
             'pkgstack = pkgstack.main:run',

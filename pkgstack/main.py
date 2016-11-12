@@ -9,9 +9,9 @@ from __init__ import __version__
 
 # PY2/PY3 support for YAML lib
 if sys.version_info.major == 3:
-    from vendor.lib3x import yaml
+    from pkgstack.vendor.lib3x import yaml
 else:
-    from vendor.lib2x import yaml
+    from pkgstack.vendor.lib2x import yaml
 
 
 def read_config(configfile):

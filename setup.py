@@ -16,7 +16,8 @@ setup(
         'console_scripts': [
             'pkgstack = pkgstack.main:run',
         ]
-    }    keywords=['pip', 'install', 'wrapper', 'yaml', 'package', 'pypi'],
+    },
+    keywords=['pip', 'install', 'wrapper', 'yaml', 'package', 'pypi'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',

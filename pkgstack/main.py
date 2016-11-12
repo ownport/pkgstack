@@ -7,11 +7,25 @@ import argparse
 
 from __init__ import __version__
 
-# PY2/PY3 support for YAML lib
-if sys.version_info.major == 3:
-    from pkgstack.vendor.lib3x import yaml
-else:
-    from pkgstack.vendor.lib2x import yaml
+path = os.path.realpath(os.path.abspath(__file__))
+sys.path.insert(0, os.path.dirname(os.path.dirname(path)))
+sys.path.insert(0, os.path.join(os.path.dirname(path), 'vendor/'))
+
+try:
+    # PY2/PY3 support for YAML lib
+    if sys.version_info.major == 3:
+        from pkgstack.vendor.lib3x import yaml
+    else:
+        from pkgstack.vendor.lib2x import yaml
+except ImportError:
+    path = os.path.realpath(os.path.abspath(__file__))
+    sys.path.insert(0, os.path.dirname(os.path.dirname(path)))
+    sys.path.insert(0, os.path.join(os.path.dirname(path), 'vendor/'))
+    # PY2/PY3 support for YAML lib
+    if sys.version_info.major == 3:
+        from vendor.lib3x import yaml
+    else:
+        from vendor.lib2x import yaml
 
 
 def read_config(configfile):

@@ -5,71 +5,19 @@ import sys
 import pip
 import argparse
 
+import utils
+
 from __init__ import __version__
+from profile import Profile
 
-path = os.path.realpath(os.path.abspath(__file__))
-sys.path.insert(0, os.path.dirname(os.path.dirname(path)))
-sys.path.insert(0, os.path.join(os.path.dirname(path), 'vendor/'))
-
-try:
-    # PY2/PY3 support for YAML lib
-    if sys.version_info.major == 3:
-        from pkgstack.vendor.lib3x import yaml
-    else:
-        from pkgstack.vendor.lib2x import yaml
-except ImportError:
-    path = os.path.realpath(os.path.abspath(__file__))
-    sys.path.insert(0, os.path.dirname(os.path.dirname(path)))
-    sys.path.insert(0, os.path.join(os.path.dirname(path), 'vendor/'))
-    # PY2/PY3 support for YAML lib
-    if sys.version_info.major == 3:
-        from vendor.lib3x import yaml
-    else:
-        from vendor.lib2x import yaml
-
-
-def read_config(configfile):
-
-    config = None
-    with open(configfile, 'r') as config:
-        config = yaml.load(config)
-    return config
-
-
-def install_package(pkg_info):
-
-    if 'name' in pkg_info:
-        print('[INFO] %s, %s' % (pkg_info['name'], pkg_info))
-    else:
-        print('[INFO] Package: %s' % pkg_info)
-
-    return pip.main(['install', pkg_info['install']])
-
-
-
-def process(config):
-
-    result = dict()
-    result['packages.successed'] = 0
-    result['packages.failed'] = 0
-    result['packages.total'] = len(config)
-
-    for pkg_info in config:
-
-        if 'install' in pkg_info:
-            if install_package(pkg_info) == 0:
-                result['packages.successed'] += 1
-                continue
-            elif 'alternatives' in pkg_info:
-                for alt in pkg_info['alternatives']:
-                    if pip.main(['install', alt]) == 0:
-                        result['packages.successed'] += 1
-                        break
-                result['packages.failed'] += 1
-
-            else:
-                print('[ERROR] Cannot install the package: %s' % pkg_info['name'])
-    return result
+# path = utils.realpath(__file__)
+# utils.vendor_add(os.path.dirname(os.path.dirname(path)))
+# utils.vendor_add(os.path.join(os.path.dirname(path), 'vendor/'))
+# # PY2/PY3 support for YAML lib
+# if sys.version_info.major == 3:
+#     from vendor.lib3x import yaml
+# else:
+#     from vendor.lib2x import yaml
 
 
 def run():
@@ -81,9 +29,9 @@ def run():
     args = parser.parse_args()
 
     if args.profile:
-        for profile in args.profile:
-            if not os.path.exists(profile):
-                raise IOError('The path to profile does not exist, %s' % profile)
-            print(process(read_config(profile)))
+        for profile_path in args.profile:
+            if not os.path.exists(profile_path):
+                raise IOError('The path to profile does not exist, %s' % profile_path)
+            Profile(profile_path).process()
     else:
         parser.print_help()

@@ -24,27 +24,36 @@ To get a help about how to use `pkgstack` please use option `--help`:
 
     $ ./pkgstack --help
 
-The sample of configuration file:
+The profile sample:
 
 .. code-block:: yaml
 
     - install: pytest
 
-    - name: Install pytest-cov
+    - name: pytest-cov, pytest plugin for measuring coverage.
       install: pytest-cov
 
-    - name: Install codecov
+    - name: codecov, report uploader for Codecov https://codecov.io
       install: codecov
       alternatives:
       - test1
       - test2
 
-    - name: Install dtguess
+    - name: dtguess, library for data type guessing
       install: dtguess==0.1.3
 
     - install: dtguess==0.1.3
       alternatives:
       - https://github.com/ownport/dtguess/releases/download/v0.1.3/dtguess-0.1.3.tar.gz
+
+
+The profile contains the list of packages which shall be installed. Each package section consists from:
+- name: optional parameter, allows to specify short description of the package
+- install: mandatory word, used to specify the primary installation step
+- alternatives: optional word, used to specify the alternatives for installation, if primary is not
+        successful
+- target: optional parameter, used to target directory for package installation
+
 
 
 For developers

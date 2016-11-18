@@ -48,10 +48,10 @@ The profile sample:
 
 
 The profile contains the list of packages which shall be installed. Each package section consists from:
+
 - name: optional parameter, allows to specify short description of the package
 - install: mandatory word, used to specify the primary installation step
-- alternatives: optional word, used to specify the alternatives for installation, if primary is not
-        successful
+- alternatives: optional word, used to specify the alternatives for installation, if primary is not successful
 - target: optional parameter, used to target directory for package installation
 
 

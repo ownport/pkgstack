@@ -24,3 +24,9 @@ def test_vendor_add(tmpdir):
 def test_realpath():
 
     assert utils.realpath('tests/test_utils.py') == __file__
+
+
+def test_package_ckeck():
+
+    assert utils.package_exists('sys') == True
+    assert utils.package_exists('-sys-') == False

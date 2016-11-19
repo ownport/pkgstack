@@ -1,18 +1,16 @@
 
 import sys
+import utils
 
-# PY2/PY3 support for YAML lib
-if sys.version_info.major == 3:
-    from pkgstack.vendor.lib3x import yaml
-else:
-    from pkgstack.vendor.lib2x import yaml
+from package import Package
 
-from pkgstack.package import Package
-
+yaml = utils.import_module('yaml', package='pkgstack')
 
 class Profile(object):
 
     def __init__(self, path):
+
+        print yaml
 
         self._profile = None
         with open(path, 'r') as profile:

@@ -1,6 +1,8 @@
 
 import os
 import sys
+import importlib
+
 
 def current_py_version():
     ''' return current python version
@@ -25,3 +27,28 @@ def realpath(path):
     ''' return absolute real path
     '''
     return os.path.realpath(os.path.abspath(path))
+
+
+def import_module(name, package=None):
+    ''' returns imported module (vendored)
+    '''
+    package_prefix = ''
+    if package and package_exists(package):
+        package_prefix = '%s.' % package
+
+    params = (package_prefix, name)
+    if sys.version_info.major == 3:
+        return importlib.import_module('%svendor.lib3x.%s' % params)
+    else:
+        return importlib.import_module('%svendor.lib2x.%s' % params)
+
+
+def package_exists(name):
+    ''' check if package exists and can be imported
+    '''
+    try:
+        __import__(name)
+    except ImportError:
+        return False
+    else:
+        return True

@@ -1,12 +1,13 @@
 
 import os
 import sys
+import pytest
 
 from pkgstack.profile import Profile
 
 TESTS_PATH=os.path.realpath(os.path.dirname(__file__))
 
-def test_profile_create():
+def test_profile_create(tmpdir):
 
     assert Profile(os.path.join(TESTS_PATH, 'resources/sample.yml')).config == [
         {'install': 'pytest',},
@@ -15,7 +16,6 @@ def test_profile_create():
         {'name': 'Install dtguess', 'install': 'dtguess==0.1.3',},
         {'install': 'dtguess==0.1.3',
             'alternatives': ['https://github.com/ownport/dtguess/releases/download/v0.1.3/dtguess-0.1.3.tar.gz'],
-            'target': 'vendor/'
         }
     ]
 

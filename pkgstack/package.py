@@ -3,7 +3,9 @@
 #   Package details
 #
 #
+import os
 import pip
+import shutil
 
 class Package(object):
 
@@ -12,10 +14,30 @@ class Package(object):
         self._details = details
 
 
-    def _install(self, pkg):
+    def _install(self, pkg, target_dir=None):
         ''' pip install <package>
         '''
-        return pip.main(['install', pkg])
+        params = ['install',]
+        if target_dir:
+            if not os.path.exists(target_dir):
+                os.makedirs(target_dir)
+            params.extend(['--target', target_dir])
+        params.append(pkg)
+        return pip.main(params)
+
+
+    def _clear_vendor_dir(self, path):
+        ''' clean vendor dir
+        '''
+        if not path or not os.path.exists(path):
+            return
+
+        for root, dirs, files in os.walk(path):
+            # remove directories ended with .egg-info
+            if root.endswith('.egg-info') and os.path.isdir(root):
+                shutil.rmtree(root)
+            # remove *.pyc
+            map(lambda x: os.remove(x) if x.endswith('.pyc') else x, files)
 
 
     def install(self):
@@ -25,19 +47,21 @@ class Package(object):
             primary = True if primary installation rule was used
             alternative = True if one of the alternative rule was used
         '''
-        print self._details
         if 'name' in self._details:
             print('[INFO] %s, %s' % (self._details['name'], self._details))
         else:
             print('[INFO] Package: %s' % self._details)
 
+        target_dir = self._details.get('target', None)
         if 'install' in self._details:
-            if self._install(self._details['install']) == 0:
+            if self._install(self._details['install'], target_dir=target_dir) == 0:
+                self._clear_vendor_dir(target_dir)
                 return {'primary': True, "alternative": False}
 
         if 'alternatives' in self._details:
             for alt in self._details['alternatives']:
-                if self._install(alt) == 0:
+                if self._install(alt, target_dir=target_dir) == 0:
+                    self._clear_vendor_dir(target_dir)
                     return {'primary': False, "alternative": True}
 
         print('[ERROR] Cannot install the package: %s' % self._details['name'])

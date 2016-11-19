@@ -10,8 +10,6 @@ class Profile(object):
 
     def __init__(self, path):
 
-        print yaml
-
         self._profile = None
         with open(path, 'r') as profile:
             _config = yaml.load(profile)

@@ -54,7 +54,7 @@ The profile contains the list of packages which shall be installed. Each package
 - install: mandatory word is used to define the primary installation step
 - alternatives: optional parameter is used to define the alternatives for installation, if primary is not successful
 - target: optional parameter is used to define the target directory for package installation
-- state: optional parameter is used to define the stage where the package is needed to be installed. The package will be installed only if the stage specified obviously in command line via --stage parameter. The packages without stage parameter will be installed automatically.
+- stage: optional parameter is used to define the stage where the package is needed to be installed. The package will be installed only if the stage specified obviously in command line via --stage parameter. The packages without stage parameter will be installed automatically.
 
 
 

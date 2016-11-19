@@ -19,6 +19,6 @@ def run():
         for profile_path in args.profile:
             if not os.path.exists(profile_path):
                 raise IOError('The path to profile does not exist, %s' % profile_path)
-            Profile(profile_path).process()
+            Profile(profile_path, stages=args.stage).process()
     else:
         parser.print_help()

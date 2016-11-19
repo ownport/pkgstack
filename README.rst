@@ -45,14 +45,16 @@ The profile sample:
     - install: dtguess==0.1.3
       alternatives:
       - https://github.com/ownport/dtguess/releases/download/v0.1.3/dtguess-0.1.3.tar.gz
+      target: pkgstack/vendor/
 
 
 The profile contains the list of packages which shall be installed. Each package section consists from:
 
-- name: optional parameter, allows to specify short description of the package
-- install: mandatory word, used to specify the primary installation step
-- alternatives: optional word, used to specify the alternatives for installation, if primary is not successful
-- target: optional parameter, used to target directory for package installation
+- name: optional parameter is used to define short description of the package
+- install: mandatory word is used to define the primary installation step
+- alternatives: optional parameter is used to define the alternatives for installation, if primary is not successful
+- target: optional parameter is used to define the target directory for package installation
+- state: optional parameter is used to define the stage where the package is needed to be installed. The package will be installed only if the stage specified obviously in command line via --stage parameter. The packages without stage parameter will be installed automatically.
 
 
 

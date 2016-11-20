@@ -28,13 +28,17 @@ def run():
     parser.add_argument('-s', '--stage', action='append', help='the stage name')
     parser.add_argument('-l', '--logging', type=str,
             help='logging level: DEBUG, INFO, WARNING, ERROR, CRITICAL')
-    args = parser.parse_args()
+    process(parser, parser.parse_args())
 
+
+def process(parser, args):
+
+    result = list()
     log_level = logging.ERROR
     if args.logging:
         log_level = getattr(logging, args.logging.upper(), None)
         if not isinstance(log_level, int):
-            logger.warning('Invalid log level: %s' % loglevel)
+            logger.warning('Invalid log level: %s' % log_level)
             logger.info('Default log level: ERROR')
 
     logging.basicConfig(level=log_level,
@@ -46,12 +50,14 @@ def run():
         for profile_path in args.profile:
             if not os.path.exists(profile_path):
                 logger.error('The path to profile does not exist, %s' % profile_path)
-                sys.exit(1)
+                continue
             stages = args.stage if isinstance(args.stage, list) else []
             try:
-                Profile(profile_path, stages=stages).process()
+                result.append(Profile(profile_path, stages=stages).process())
             except Exception, err:
                 logger.error(err)
-                sys.exit(1)
+                continue
     else:
         parser.print_help()
+
+    return result

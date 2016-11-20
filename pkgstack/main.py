@@ -39,7 +39,7 @@ def run():
 
     logging.basicConfig(level=log_level,
                         handler=NullHandler(),
-                        format="%(asctime)s [%(name)s] (%(levelname)s) %(message)s"
+                        format="%(asctime)s (%(name)s) [%(levelname)s] %(message)s"
     )
 
     if args.profile:

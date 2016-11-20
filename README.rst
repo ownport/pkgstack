@@ -24,6 +24,19 @@ To get a help about how to use `pkgstack` please use option `--help`:
 
     $ ./pkgstack --help
 
+    usage: pkgstack [-h] [-v] -p PROFILE [-s STAGE] [-l LOGGING]
+
+    optional arguments:
+    -h, --help            show this help message and exit
+    -v, --version         show program's version number and exit
+    -p PROFILE, --profile PROFILE
+                          the path to the package profile, yaml file
+    -s STAGE, --stage STAGE
+                          the stage name
+    -l LOGGING, --logging LOGGING
+                          logging level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+
+
 The profile sample:
 
 .. code-block:: yaml
@@ -58,6 +71,29 @@ The profile contains the list of packages which shall be installed. Each package
 - alternatives: optional parameter is used to define the alternatives for installation, if primary is not successful
 - target: optional parameter is used to define the target directory for package installation
 - stage: optional parameter is used to define the stage where the package is needed to be installed. The package will be installed only if the stage specified obviously in command line via --stage parameter. The packages without stage parameter will be installed automatically.
+
+Samples
+---------
+
+To install python packages from profile:
+
+    $ ./pkgstack --profile packages.yml
+
+If there is needed to install packages from several profiles:
+
+    $ ./pkgstack --profile primary.yml --profile secondary.yml
+
+The profile can contains packages which are required in different stages. For example: if you need to install only required packages without development packages, you need to tun
+
+    $ ./pkgstack --profile packages.yml
+
+this command will install only packages without "stage" parameter. If you define stage parameter in the command line with indication a stage or stages, pkgstack will install all packages without stage parameter + packages with specified stage
+
+    $ ./pkgstack --profile packages.yml --stage test
+
+Also you can specify several stages:
+
+    $ ./pkgstack --profile packages.yml --stage test --stage docker
 
 
 For developers

@@ -6,12 +6,14 @@
 import os
 import pip
 import shutil
+import logging
 
 class Package(object):
 
     def __init__(self, details):
 
         self._details = details
+        self._logger = logging.getLogger(__name__)
 
 
     def _install(self, pkg, target_dir=None):
@@ -48,9 +50,9 @@ class Package(object):
             alternative = True if one of the alternative rule was used
         '''
         if 'name' in self._details:
-            print('[INFO] %s, %s' % (self._details['name'], self._details))
+            self._logger.info('%s, %s' % (self._details['name'], self._details))
         else:
-            print('[INFO] Package: %s' % self._details)
+            self._logger.info('Package: %s' % self._details)
 
         target_dir = self._details.get('target', None)
         if 'install' in self._details:
@@ -64,5 +66,5 @@ class Package(object):
                     self._clear_vendor_dir(target_dir)
                     return {'primary': False, "alternative": True}
 
-        print('[ERROR] Cannot install the package: %s' % self._details['name'])
+        self._logger.error('Cannot install the package: %s' % self._details['name'])
         return {'primary': False, "alternative": False}

@@ -1,10 +1,12 @@
 
 import sys
 import utils
+import logging
 
 from package import Package
 
 yaml = utils.import_module('yaml', package='pkgstack')
+
 
 class Profile(object):
 

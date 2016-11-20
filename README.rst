@@ -29,12 +29,15 @@ The profile sample:
 .. code-block:: yaml
 
     - install: pytest
+      stage: test
 
     - name: pytest-cov, pytest plugin for measuring coverage.
       install: pytest-cov
+      stage: test
 
     - name: codecov, report uploader for Codecov https://codecov.io
       install: codecov
+      stage: test
       alternatives:
       - test1
       - test2
@@ -55,7 +58,6 @@ The profile contains the list of packages which shall be installed. Each package
 - alternatives: optional parameter is used to define the alternatives for installation, if primary is not successful
 - target: optional parameter is used to define the target directory for package installation
 - stage: optional parameter is used to define the stage where the package is needed to be installed. The package will be installed only if the stage specified obviously in command line via --stage parameter. The packages without stage parameter will be installed automatically.
-
 
 
 For developers

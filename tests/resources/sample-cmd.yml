@@ -1,6 +1,4 @@
 - install: pytest
 
 - install: pytest-cov
-  stage:
-  - test
-  
+  stage: test

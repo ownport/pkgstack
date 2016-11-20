@@ -11,7 +11,8 @@
   alternatives:
   - test1
   - test2
-  stage: test
+  stage:
+  - test
 
 - name: Install dtguess
   install: dtguess==0.1.3

@@ -30,6 +30,15 @@ def test_process():
     }
 
 
+def test_profile_process_via_stage():
+
+    assert Profile(os.path.join(TESTS_PATH, 'resources/sample.yml'), stages=['test',]).process() == {
+        'packages.successed': 5,
+        'packages.failed': 0,
+        'packages.total': 5
+    }
+
+
 def test_profile_incorrect_stage_type():
 
     with pytest.raises(RuntimeError):

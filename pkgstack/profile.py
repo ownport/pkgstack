@@ -40,7 +40,7 @@ class Profile(object):
         for pkg_info in self._profile:
 
             pkg_stage = pkg_info.get('stage', None)
-            if pkg_stage and pkg_info not in self._stages:
+            if pkg_stage and pkg_stage not in self._stages:
                 continue
 
             install_result = Package(pkg_info).install()

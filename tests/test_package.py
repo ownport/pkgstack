@@ -15,3 +15,11 @@ def test_target_dir(tmpdir):
     for f in os.listdir(os.path.join(vendor_path, 'pkgstack/')):
         if f.endswith('.egg-info'):
             assert False, 'Error! Founded path with ended .egg-info'
+
+    pkg = Package({
+        'install': 'six', 'target': vendor_path
+    })
+    pkg.install()
+    for f in os.listdir(os.path.join(vendor_path, 'pkgstack/')):
+        if f.endswith('.dist-info'):
+            assert False, 'Error! Founded path with ended .dist-info'

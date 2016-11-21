@@ -36,8 +36,13 @@ class Package(object):
 
         for root, dirs, files in os.walk(path):
             # remove directories ended with .egg-info
+            if root.endswith('.dist-info') and os.path.isdir(root):
+                shutil.rmtree(root)
+                continue
+            # remove directories ended with .egg-info
             if root.endswith('.egg-info') and os.path.isdir(root):
                 shutil.rmtree(root)
+                continue
             # remove *.pyc
             map(lambda x: os.remove(os.path.join(root,x)) if x.endswith('.pyc') else x, files)
 

@@ -39,7 +39,7 @@ class Package(object):
             if root.endswith('.egg-info') and os.path.isdir(root):
                 shutil.rmtree(root)
             # remove *.pyc
-            map(lambda x: os.remove(x) if x.endswith('.pyc') else x, files)
+            map(lambda x: os.remove(os.path.join(root,x)) if x.endswith('.pyc') else x, files)
 
 
     def install(self):

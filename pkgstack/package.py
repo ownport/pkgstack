@@ -30,7 +30,6 @@ class Package(object):
 
         params.append(pkg)
         logger.debug('Package: {}, params: {}'.format(pkg, params))
-        print params
         return pip.main(params)
 
     def _clear_vendor_dir(self, path):

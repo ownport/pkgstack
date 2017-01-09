@@ -1,0 +1,3 @@
+- name: install requests package w/o deps
+  install: requests
+  no-deps: true

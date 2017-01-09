@@ -1,13 +1,13 @@
 
 import os
-import sys
 import pytest
 
 from pkgstack.profile import Profile
 
-TESTS_PATH=os.path.realpath(os.path.dirname(__file__))
+TESTS_PATH = os.path.realpath(os.path.dirname(__file__))
 
-def test_profile_create(tmpdir):
+
+def test_profile_create():
 
     config = Profile(os.path.join(TESTS_PATH, 'resources/sample.yml')).config
     assert config == [
@@ -43,3 +43,20 @@ def test_profile_incorrect_stage_type():
 
     with pytest.raises(RuntimeError):
         p = Profile(os.path.join(TESTS_PATH, 'resources/sample.yml'), stages='test')
+
+
+def test_profile_no_deps():
+
+    config = Profile(os.path.join(TESTS_PATH, 'resources/sample-no-deps.yml')).config
+    assert config == [
+        {'install': 'requests', 'name': 'install requests package w/o deps', 'no-deps': True}
+    ]
+
+
+def test_process_profile_no_deps():
+
+    assert Profile(os.path.join(TESTS_PATH, 'resources/sample-no-deps.yml')).process() == {
+        'packages.successed': 1,
+        'packages.failed': 0,
+        'packages.total': 1
+    }

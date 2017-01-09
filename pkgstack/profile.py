@@ -18,8 +18,7 @@ class Profile(object):
 
         self._profile = None
         with open(path, 'r') as profile:
-            _config = yaml.load(profile)
-            self._profile = _config
+            self._profile = yaml.load(profile)
 
 
     @property

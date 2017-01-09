@@ -1,7 +1,5 @@
 
-import sys
 import utils
-import logging
 
 from package import Package
 
@@ -20,13 +18,11 @@ class Profile(object):
         with open(path, 'r') as profile:
             self._profile = yaml.load(profile)
 
-
     @property
     def config(self):
         ''' returns profile details
         '''
         return self._profile
-
 
     def process(self):
         ''' process packages in the profile

@@ -8,6 +8,7 @@ import pip
 import shutil
 import logging
 
+
 class Package(object):
 
     def __init__(self, details):
@@ -15,18 +16,16 @@ class Package(object):
         self._details = details
         self._logger = logging.getLogger(__name__)
 
-
     def _install(self, pkg, target_dir=None):
         ''' pip install <package>
         '''
-        params = ['install',]
+        params = ['install', ]
         if target_dir:
             if not os.path.exists(target_dir):
                 os.makedirs(target_dir)
             params.extend(['--target', target_dir])
         params.append(pkg)
         return pip.main(params)
-
 
     def _clear_vendor_dir(self, path):
         ''' clean vendor dir
@@ -45,7 +44,6 @@ class Package(object):
                 continue
             # remove *.pyc
             map(lambda x: os.remove(os.path.join(root,x)) if x.endswith('.pyc') else x, files)
-
 
     def install(self):
         ''' install package
